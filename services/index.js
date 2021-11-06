@@ -34,7 +34,7 @@ export const getPosts = () => {
   `;
 
   return request(graphqlAPI, query)
-    .then((result) => result.postsConnection.edges)
+    .then((result) => result.postsConnection.edges.reverse())
     .catch((error) => console.log("Error during getPosts request: ", error));
 };
 
@@ -56,7 +56,7 @@ export const getRecentPosts = () => {
   `;
 
   return request(graphqlAPI, query)
-    .then((result) => result.posts)
+    .then((result) => result.posts.reverse())
     .catch((error) =>
       console.log("Error during getRecentPosts request: ", error)
     );
@@ -85,7 +85,7 @@ export const getSimilarPosts = (categories, slug) => {
   `;
 
   return request(graphqlAPI, query, { categories, slug })
-    .then((result) => result.posts)
+    .then((result) => result.posts.reverse())
     .catch((error) =>
       console.log("Error during getSimilarPosts request: ", error)
     );
@@ -141,5 +141,100 @@ export const getPostDetails = (slug) => {
     .then((result) => result.post)
     .catch((error) =>
       console.log("Error during getPostDetails request: ", error)
+    );
+};
+
+// Since Next.js offers the functionality to outsource backend requests into serverless functions hosted at Vercel there is no need for a dedicated backend. Still we can make a HTTP request to send the comments through the serverless backend found within the api folder and receive them in the headless GraphCMS. Approval and disapproval of comments will happen within the GraphCMS dashboard.
+export const submitComment = async (commentObject) => {
+  const result = await fetch("/api/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commentObject),
+  });
+
+  return result.json();
+};
+
+export const getComments = async (slug) => {
+  const query = gql`
+    query GetComments($slug: String!) {
+      comments(where: { post: { slug: $slug } }) {
+        name
+        createdAt
+        comment
+      }
+    }
+  `;
+
+  return request(graphqlAPI, query, { slug })
+    .then((result) => result.comments)
+    .catch((error) => console.log("Error during getComments request: ", error));
+};
+
+export const getFeaturedPosts = async () => {
+  const query = gql`
+    query GetCategoryPost() {
+      posts(where: {featuredPost: true}) {
+        author {
+          name
+          photo {
+            url
+          }
+        }
+        featuredImage {
+          url
+        }
+        title
+        slug
+        createdAt
+      }
+    }   
+  `;
+
+  return request(graphqlAPI, query)
+    .then((result) => result.posts.reverse())
+    .catch((error) =>
+      console.log("Error during getFeaturedPosts request: ", error)
+    );
+};
+
+export const getCategoryPost = async (slug) => {
+  const query = gql`
+    query GetCategoryPost($slug: String!) {
+      postsConnection(where: { categories_some: { slug: $slug } }) {
+        edges {
+          cursor
+          node {
+            author {
+              bio
+              name
+              id
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  return request(graphqlAPI, query, { slug })
+    .then((result) => result.postsConnection.edges.reverse())
+    .catch((error) =>
+      console.log("Error during getCategoryPost request: ", error)
     );
 };

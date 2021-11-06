@@ -5,7 +5,7 @@ import format from "date-fns/format";
 const PostCard = ({ post }) => {
   return (
     <div className="p-0 mb-8 bg-white rounded-lg shadow-lg lg:p-8">
-      <div className="flex items-center justify-between w-full px-4 pt-4 mb-4 text-center lg:pt-0 lg:px-0">
+      <div className="flex items-center justify-between w-full px-4 pt-4 mb-4 text-center select-none lg:pt-0 lg:px-0">
         <div className="flex items-center justify-center w-auto mr-8 lg:mb-0 lg:w-auto">
           <img
             src={post?.author.photo.url}
@@ -42,7 +42,7 @@ const PostCard = ({ post }) => {
           <span>{format(new Date(post?.createdAt), "MMM dd, yyyy")}</span>
         </div>
       </div>
-      <div className="relative mb-6 overflow-hidden shadow-md pb-80">
+      <div className="relative mb-6 overflow-hidden shadow-md select-none pb-80">
         <img
           src={post?.featuredImage.url}
           alt={post?.title}
@@ -56,7 +56,7 @@ const PostCard = ({ post }) => {
       <div className="px-4 mb-8 text-lg font-normal text-center text-gray-700 lg:px-20">
         {post?.excerpt}
       </div>
-      <div className="pb-8 text-center lg:pb-0">
+      <div className="pb-8 text-center select-none lg:pb-0">
         <Link href={`/post/${post?.slug}`}>
           <span className="inline-block px-8 py-3 text-lg font-medium text-white transition duration-500 transform bg-blue-600 rounded-full cursor-pointer hover:-translate-y-1">
             Continue Reading
