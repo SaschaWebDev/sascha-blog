@@ -64,7 +64,7 @@ const PostDetail = ({ post }) => {
       <div className="pb-12 mb-8 bg-white rounded-lg shadow-lg lg:p-8">
         <div className="relative mb-6 overflow-hidden shadow-md">
           <img
-            src={post.featuredImage.url}
+            src={post?.featuredImage.url}
             alt=""
             className="object-cover object-top w-full h-full rounded-t-lg shadow-lg lg:rounded-lg"
           />
@@ -73,14 +73,14 @@ const PostDetail = ({ post }) => {
           <div className="flex justify-between w-full mb-8 items-between">
             <div className="flex items-center justify-center lg:mr-8 lg:mb-0 lg:w-auto">
               <img
-                alt={post.author.name}
+                alt={post?.author.name}
                 height="30px"
                 width="30px"
                 className="align-middle rounded-full"
-                src={post.author.photo.url}
+                src={post?.author.photo.url}
               />
               <p className="inline ml-2 text-lg font-medium text-gray-700 align-middle">
-                {post.author.name}
+                {post?.author.name}
               </p>
             </div>
             <div className="font-medium text-gray-700">
@@ -99,12 +99,14 @@ const PostDetail = ({ post }) => {
                 />
               </svg>
               <span className="align-middle">
-                {format(new Date(post.createdAt), "MMM dd, yyyy")}
+                {post
+                  ? format(new Date(post.createdAt), "MMM dd, yyyy")
+                  : "Unknown"}
               </span>
             </div>
           </div>
-          <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
-          {post.content.raw.children.map((typeObj, index) => {
+          <h1 className="mb-8 text-3xl font-semibold">{post?.title}</h1>
+          {post?.content.raw.children.map((typeObj, index) => {
             const children = typeObj.children.map((item, itemindex) =>
               getContentFragment(itemindex, item.text, item)
             );
