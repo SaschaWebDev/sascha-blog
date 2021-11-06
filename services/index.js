@@ -34,7 +34,7 @@ export const getPosts = () => {
   `;
 
   return request(graphqlAPI, query)
-    .then((result) => result.postsConnection.edges)
+    .then((result) => result.postsConnection.edges.reverse())
     .catch((error) => console.log("Error during getPosts request: ", error));
 };
 
@@ -56,7 +56,7 @@ export const getRecentPosts = () => {
   `;
 
   return request(graphqlAPI, query)
-    .then((result) => result.posts)
+    .then((result) => result.posts.reverse())
     .catch((error) =>
       console.log("Error during getRecentPosts request: ", error)
     );
@@ -85,7 +85,7 @@ export const getSimilarPosts = (categories, slug) => {
   `;
 
   return request(graphqlAPI, query, { categories, slug })
-    .then((result) => result.posts)
+    .then((result) => result.posts.reverse())
     .catch((error) =>
       console.log("Error during getSimilarPosts request: ", error)
     );
