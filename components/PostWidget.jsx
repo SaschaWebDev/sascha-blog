@@ -26,19 +26,19 @@ const PostWidget = ({ categories, slug }) => {
         <div key={index} className="flex items-center w-full mb-4">
           <div className="flex-none w-16">
             <img
-              src={post.featuredImage.url}
+              src={post?.featuredImage.url}
               height="60px"
               width="60px"
-              alt={post.title}
+              alt={post?.title}
               className="align-middle rounded-md"
             />
           </div>
           <div className="flex-grow ml-4">
             <p className="text-gray-500 font-xs">
-              {format(new Date(post.createdAt), "MMM dd, yyyy")}
+              {format(new Date(post?.createdAt), "MMM dd, yyyy")}
             </p>
-            <Link href={`/post/${post.slug}`} key={index}>
-              {post.title}
+            <Link href={`/post/${post?.slug}`} key={index}>
+              {post?.title}
             </Link>
           </div>
         </div>

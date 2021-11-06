@@ -7,15 +7,15 @@ const Author = ({ author }) => {
       <div className="absolute left-0 right-0 -top-14">
         <Image
           unoptimized
-          src={author.photo.url}
-          alt={author.name}
+          src={author?.photo.url}
+          alt={author?.name}
           height="100px"
           width="100px"
           className="align-middle rounded-full"
         />
       </div>
-      <h3 className="my-4 text-xl font-bold text-white">{author.name}</h3>
-      <p className="text-lg text-white">{author.bio}</p>
+      <h3 className="my-4 text-xl font-bold text-white">{author?.name}</h3>
+      <p className="text-lg text-white">{author?.bio}</p>
     </div>
   );
 };
