@@ -18,3 +18,4 @@ The project was created using Next.js bootstrap cli command `npx create-next-app
 ## Styling
 
 - The navigation bar uses the tailwindcss command `contents` which will create a phantom container whose children act like direct children of the parent
+- The Layout.jsx component is created in such a way that every component can used this through props and the header will always be added above the given component. Thus the redundancy of inserted the header before every view is gone.
