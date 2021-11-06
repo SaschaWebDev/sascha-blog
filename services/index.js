@@ -193,7 +193,9 @@ export const getFeaturedPosts = async () => {
     }   
   `;
 
-  const result = await request(graphqlAPI, query);
-
-  return result.posts;
+  return request(graphqlAPI, query)
+    .then((result) => result.posts.reverse())
+    .catch((error) =>
+      console.log("Error during getFeaturedPosts request: ", error)
+    );
 };
