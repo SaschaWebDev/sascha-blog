@@ -5,19 +5,9 @@ import Link from "next/link";
 const PostCard = ({ post }) => {
   console.log(post);
   return (
-    <div className="p-0 pb-12 mb-8 bg-white rounded-lg shadow-lg lg:p-8">
-      <div className="relative mb-6 overflow-hidden shadow-md pb-80">
-        <img
-          src={post.featuredImage.url}
-          alt={post.title}
-          className="absolute object-cover object-top w-full rounded-t-lg shadow-lg h-80 lg:rounded-lg"
-        />
-      </div>
-      <div className="mb-8 font-semibold text-center transition duration-700 cursor-pointer hover:text-blue-600 text-30xl">
-        <Link href={`/post/${post.slug}`}>{post.title}</Link>
-      </div>
-      <div className="items-center justify-center block w-full mb-8 text-center lg:flex">
-        <div className="flex items-center justify-center w-full mb-4 mr-8 lg:mb-0 lg:w-auto">
+    <div className="p-0 mb-8 bg-white rounded-lg shadow-lg lg:p-8">
+      <div className="flex items-center justify-between w-full px-4 pt-4 mb-4 text-center lg:pt-0 lg:px-0">
+        <div className="flex items-center justify-center w-auto mr-8 lg:mb-0 lg:w-auto">
           <img
             src={post.author.photo.url}
             alt=""
@@ -25,9 +15,15 @@ const PostCard = ({ post }) => {
             width="30px"
             className="align-middle rounded-full"
           />
-          <p className="inline ml-2 text-lg text-gray-700 align-middle">
-            {post.author.name}
-          </p>
+          <Link
+            href="https://saschamajewsky.de"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <a className="inline ml-2 text-base text-gray-700 align-middle cursor-pointer hover:text-blue-500">
+              {post.author.name}
+            </a>
+          </Link>
         </div>
         <div className="font-medium text-gray-700">
           <svg
@@ -47,10 +43,21 @@ const PostCard = ({ post }) => {
           <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
         </div>
       </div>
+      <div className="relative mb-6 overflow-hidden shadow-md pb-80">
+        <img
+          src={post.featuredImage.url}
+          alt={post.title}
+          className="absolute object-cover object-top w-full rounded-t-lg shadow-lg h-80 lg:rounded-lg"
+        />
+      </div>
+      <div className="mb-8 text-2xl font-semibold text-center transition duration-700 cursor-pointer hover:text-blue-600">
+        <Link href={`/post/${post.slug}`}>{post.title}</Link>
+      </div>
+
       <div className="px-4 mb-8 text-lg font-normal text-center text-gray-700 lg:px-20">
         {post.excerpt}
       </div>
-      <div className="text-center">
+      <div className="pb-8 text-center lg:pb-0">
         <Link href={`/post/${post.slug}`}>
           <span className="inline-block px-8 py-3 text-lg font-medium text-white transition duration-500 transform bg-blue-600 rounded-full cursor-pointer hover:-translate-y-1">
             Continue Reading
