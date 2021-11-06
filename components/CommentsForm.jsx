@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
+import { submitComment } from "../services";
+
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
@@ -30,17 +32,31 @@ const CommentsForm = ({ slug }) => {
     };
 
     if (storeData) {
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
+      window.localStorage.setItem("name", name);
+      window.localStorage.setItem("email", email);
     } else {
-      localStorage.removeItem("name");
-      localStorage.removeItem("email");
+      window.localStorage.removeItem("name");
+      window.localStorage.removeItem("email");
     }
+
+    submitComment(commentObject).then((response) => {
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 3000);
+    });
   };
+
+  useEffect(() => {
+    nameElement.current.value = window.localStorage.getItem("name");
+    emailElement.current.value = window.localStorage.getItem("email");
+  }, []);
 
   return (
     <div className="p-8 pb-12 mb-8 bg-white rounded-lg shadow-lg">
-      <h3 className="pb-4 mb-8 text-xl font-semibold border-b">CommentsForm</h3>
+      <h3 className="pb-4 mb-8 text-xl font-semibold border-b">
+        Leave a Reply
+      </h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
           ref={commentElement}

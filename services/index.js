@@ -143,3 +143,16 @@ export const getPostDetails = (slug) => {
       console.log("Error during getPostDetails request: ", error)
     );
 };
+
+// Since Next.js offers the functionality to outsource backend requests into serverless functions hosted at Vercel there is no need for a dedicated backend. Still we can make a HTTP request to send the comments through the serverless backend found within the api folder and receive them in the headless GraphCMS. Approval and disapproval of comments will happen within the GraphCMS dashboard.
+export const submitComment = async (commentObject) => {
+  const result = await fetch("/api/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commentObject),
+  });
+
+  return result.json();
+};
