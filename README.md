@@ -41,3 +41,20 @@ export async function getStaticProps() {
   };
 }
 ```
+
+### Next.js
+
+- When using dynamic pages like `[slug].js` and using `getStaticProps` for data fetching you will also need to implement `getStaticPath` like described below. So Next.js knows about all possible dynamic path that are available for routing so that it can statically render and prepare them.
+
+```javascript
+export async function getStaticPaths() {
+  const posts = await getPosts();
+
+  return {
+    paths: posts.map(({ node: { slug } }) => ({
+      params: { slug },
+    })),
+    fallback: false,
+  };
+}
+```

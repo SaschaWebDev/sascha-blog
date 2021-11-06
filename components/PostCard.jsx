@@ -1,9 +1,8 @@
 import React from "react";
-import moment from "moment";
 import Link from "next/link";
+import format from "date-fns/format";
 
 const PostCard = ({ post }) => {
-  console.log(post);
   return (
     <div className="p-0 mb-8 bg-white rounded-lg shadow-lg lg:p-8">
       <div className="flex items-center justify-between w-full px-4 pt-4 mb-4 text-center lg:pt-0 lg:px-0">
@@ -40,7 +39,7 @@ const PostCard = ({ post }) => {
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
+          <span>{format(new Date(post.createdAt), "MMM dd, yyyy")}</span>
         </div>
       </div>
       <div className="relative mb-6 overflow-hidden shadow-md pb-80">
