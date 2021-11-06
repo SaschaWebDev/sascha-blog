@@ -4,7 +4,7 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export const getPosts = () => {
   const query = gql`
-    query MyQuery {
+    query getPosts {
       postsConnection {
         edges {
           node {
@@ -64,7 +64,7 @@ export const getRecentPosts = () => {
 
 // This query will fetch posts that does not contain the same slug thus exclude the current post but contain some of the same categories.
 
-export const getSimilarPosts = () => {
+export const getSimilarPosts = async (categories, slug) => {
   const query = gql`
     query GetPostDetails($slug: String!, $categories: [String!]) {
       posts(
@@ -83,12 +83,9 @@ export const getSimilarPosts = () => {
       }
     }
   `;
+  const result = await request(graphqlAPI, query, { categories, slug });
 
-  return request(graphqlAPI, query)
-    .then((result) => result.posts)
-    .catch((error) =>
-      console.log("Error during getSimilarPosts request: ", error)
-    );
+  return result.posts;
 };
 
 export const getCategories = async () => {
@@ -106,4 +103,38 @@ export const getCategories = async () => {
     .catch((error) =>
       console.log("Error during getCategories request: ", error)
     );
+};
+
+export const getPostDetails = async (slug) => {
+  const query = gql`
+    query GetPostDetails($slug: String!) {
+      post(where: { slug: $slug }) {
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        author {
+          name
+          bio
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        content {
+          raw
+        }
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.post;
 };
