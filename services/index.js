@@ -168,7 +168,7 @@ export const getComments = async (slug) => {
     }
   `;
 
-  const result = await request(graphqlAPI, query, { slug });
-
-  return result.comments;
+  return request(graphqlAPI, query, { slug })
+    .then((result) => result.comments)
+    .catch((error) => console.log("Error during getComments request: ", error));
 };
