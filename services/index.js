@@ -2,7 +2,7 @@ import { request, gql } from "graphql-request";
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
-export const getPosts = async () => {
+export const getPosts = () => {
   const query = gql`
     query MyQuery {
       postsConnection {
@@ -33,12 +33,12 @@ export const getPosts = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
-
-  return result.postsConnection.edges;
+  return request(graphqlAPI, query)
+    .then((result) => result.postsConnection.edges)
+    .catch((error) => console.log("Error during getPosts request: ", error));
 };
 
-export const getRecentPosts = async () => {
+export const getRecentPosts = () => {
   const query = gql`
     query GetPostDetails() {
       posts(
@@ -55,14 +55,16 @@ export const getRecentPosts = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
-
-  return result.posts;
+  return request(graphqlAPI, query)
+    .then((result) => result.posts)
+    .catch((error) =>
+      console.log("Error during getRecentPosts request: ", error)
+    );
 };
 
 // This query will fetch posts that does not contain the same slug thus exclude the current post but contain some of the same categories.
 
-export const getRSimilarPosts = async () => {
+export const getSimilarPosts = () => {
   const query = gql`
     query GetPostDetails($slug: String!, $categories: [String!]) {
       posts(
@@ -82,7 +84,26 @@ export const getRSimilarPosts = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  return request(graphqlAPI, query)
+    .then((result) => result.posts)
+    .catch((error) =>
+      console.log("Error during getSimilarPosts request: ", error)
+    );
+};
 
-  return result.posts;
+export const getCategories = () => {
+  const query = gql`
+    query getCategories {
+      categories {
+        name
+        slug
+      }
+    }
+  `;
+
+  return request(graphqlAPI, query)
+    .then((result) => result.categories)
+    .catch((error) =>
+      console.log("Error during getCategories request: ", error)
+    );
 };
