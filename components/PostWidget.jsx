@@ -10,15 +10,11 @@ const PostWidget = ({ categories, slug }) => {
   const [highLightedPosts, setHighLightedPosts] = useState([]);
 
   useEffect(() => {
-    if (slug) {
-      getSimilarPosts(categories, slug).then((result) => {
-        setHighLightedPosts(result);
-      });
-    } else {
-      getRecentPosts().then((result) => {
-        setHighLightedPosts(result);
-      });
-    }
+    slug
+      ? getSimilarPosts(categories, slug).then((result) =>
+          setHighLightedPosts(result)
+        )
+      : getRecentPosts().then((result) => setHighLightedPosts(result));
   }, [slug]);
 
   return (
@@ -26,7 +22,6 @@ const PostWidget = ({ categories, slug }) => {
       <h3 className="pb-4 mb-8 text-xl font-semibold border-b">
         {slug ? "Related Posts" : "Recent Posts"}
       </h3>
-      {console.log("highLightedPosts", highLightedPosts)}
       {highLightedPosts?.map((post, index) => (
         <div key={index} className="flex items-center w-full mb-4">
           <div className="flex-none w-16">

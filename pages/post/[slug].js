@@ -11,7 +11,6 @@ import {
 } from "../../components";
 
 const PostPage = ({ post }) => {
-  console.log("POST", post);
   return (
     <>
       <div className="container px-10 mx-auto mb-8">
@@ -40,22 +39,30 @@ const PostPage = ({ post }) => {
 export default PostPage;
 
 // Fetch data at build time
-export async function getStaticProps({ params }) {
-  console.log("PARAMS SLUG", params.slug);
-  const data = await getPostDetails(params.slug);
-  return {
-    props: {
-      post: data,
-    },
-  };
+export function getStaticProps({ params }) {
+  return getPostDetails(params.slug)
+    .then((postData) => {
+      return {
+        props: {
+          post: postData,
+        },
+      };
+    })
+    .catch((error) =>
+      console.log("Error during SSG postdata fetching: ", error)
+    );
 }
 
-// Specify dynamic routes to pre-render pages based on data.
-// The HTML is generated at build time and will be reused on each request.
-export async function getStaticPaths() {
-  const posts = await getPosts();
-  return {
-    paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
-    fallback: true,
-  };
+// Allow Next.js to find all dynamic routes so it can rerender the html for all sites for static display at build time.
+export function getStaticPaths() {
+  return getPosts()
+    .then((posts) => {
+      return {
+        paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
+        fallback: true,
+      };
+    })
+    .catch((error) =>
+      console.log("Error during SSG possible path fetching: ", error)
+    );
 }
