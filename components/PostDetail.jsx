@@ -62,7 +62,7 @@ const PostDetail = ({ post }) => {
   return (
     <>
       <div className="pb-12 mb-8 bg-white rounded-lg shadow-lg lg:p-8">
-        <div className="relative mb-6 overflow-hidden shadow-md">
+        <div className="relative mb-6 overflow-hidden shadow-md select-none">
           <img
             src={post?.featuredImage.url}
             alt=""
@@ -70,7 +70,7 @@ const PostDetail = ({ post }) => {
           />
         </div>
         <div className="px-4 lg:px-0">
-          <div className="flex justify-between w-full mb-8 items-between">
+          <div className="flex justify-between w-full mb-8 select-none items-between">
             <div className="flex items-center justify-center lg:mr-8 lg:mb-0 lg:w-auto">
               <img
                 alt={post?.author.name}
@@ -86,7 +86,7 @@ const PostDetail = ({ post }) => {
             <div className="font-medium text-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="inline w-6 h-6 mr-2 text-pink-500"
+                className="inline w-6 h-6 mr-2 text-blue-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
