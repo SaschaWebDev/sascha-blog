@@ -4,7 +4,7 @@ import Image from "next/image";
 const Author = ({ author }) => {
   return (
     <div className="relative p-12 mt-20 mb-8 text-center bg-black rounded-lg bg-opacity-20">
-      <div className="absolute left-0 right-0 -top-14">
+      <div className="absolute left-0 right-0 select-none -top-14">
         <Image
           unoptimized
           src={author?.photo.url}
