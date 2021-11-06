@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import format from "date-fns/format";
 
 const PostDetail = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
@@ -99,7 +99,7 @@ const PostDetail = ({ post }) => {
                 />
               </svg>
               <span className="align-middle">
-                {moment(post.createdAt).format("MMM DD, YYYY")}
+                {format(new Date(post.createdAt), "MMM dd, yyyy")}
               </span>
             </div>
           </div>
