@@ -16,7 +16,7 @@ body {
     height: 100vh;
     //background: linear-gradient(to right bottom, #6d327c, #485DA6, #00a1ba, #01b18e, #32b37b);
     // background: #D3D3D3;
-    background-image: url("../public/bg.jpg");
+    background: #141a1e;
     position: fixed;
     left: 0;
     top: 0;
@@ -24,8 +24,13 @@ body {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
+    scroll-behavior: smooth;
   }
 }
+
+/* html {
+  scroll-behavior: smooth;
+} */
 
 .text-shadow {
   text-shadow: 0px 2px 0px rgb(0 0 0 / 30%);

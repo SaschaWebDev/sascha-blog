@@ -81,6 +81,7 @@ const FeaturedPosts = () => {
         customRightArrow={customRightArrow}
         responsive={responsive}
         itemClass="px-4"
+        autoPlay={true}
       >
         {dataLoaded &&
           featuredPosts.map((post, index) => (

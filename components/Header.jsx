@@ -13,12 +13,12 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="container px-10 mx-auto mb-8">
-      <div className="inline-block w-full py-8 border-b border-blue-400">
+    <div className="container mx-auto mb-8 px-14">
+      <div className="inline-block w-full py-8 border-b border-[#424b55]">
         <div className="block md:float-left">
           <Link href="/">
             <span className="text-4xl font-bold text-white cursor-pointer select-none">
-              SaschaWebDev - Blog
+              SaschaWebDev Blog
             </span>
           </Link>
         </div>

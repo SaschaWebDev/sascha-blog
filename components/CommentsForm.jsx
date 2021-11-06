@@ -53,14 +53,14 @@ const CommentsForm = ({ slug }) => {
   }, []);
 
   return (
-    <div className="p-8 pb-12 mb-8 bg-white rounded-lg shadow-lg">
-      <h3 className="pb-4 mb-8 text-xl font-semibold border-b select-none">
+    <div className="p-8 pb-12 mb-8 bg-[#202933] rounded-lg shadow-lg">
+      <h3 className="pb-4 mb-8 text-xl font-semibold text-gray-300 border-b select-none border-[#424b55]">
         Leave a Reply
       </h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
           ref={commentElement}
-          className="w-full p-4 text-gray-700 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-gray-200"
+          className="w-full p-4 text-gray-300 bg-gray-700 rounded-lg outline-none focus:ring-2 focus:ring-gray-500"
           placeholder="Comment"
           name="comment"
         />
@@ -69,14 +69,14 @@ const CommentsForm = ({ slug }) => {
         <input
           type="text"
           ref={nameElement}
-          className="w-full p-2 text-gray-700 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-gray-200"
+          className="w-full p-2 pl-4 text-gray-300 bg-gray-700 rounded-lg outline-none focus:ring-2 focus:ring-gray-500"
           placeholder="Name"
           name="name"
         />
         <input
           type="email"
           ref={emailElement}
-          className="w-full p-2 text-gray-700 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-gray-200"
+          className="w-full p-2 pl-4 text-gray-300 bg-gray-700 rounded-lg outline-none focus:ring-2 focus:ring-gray-500"
           placeholder="Email"
           name="email"
         />
@@ -103,7 +103,7 @@ const CommentsForm = ({ slug }) => {
         <button
           type="button"
           onClick={handleCommentSubmission}
-          className="inline-block px-8 py-3 text-lg text-white transition duration-500 bg-blue-600 rounded-full cursor-pointer ease hover:bg-indigo-900"
+          className="inline-block px-8 py-3 text-lg text-white transition duration-500 bg-[#b1c3ff62] hover:bg-[#b1c3ff9f] rounded-full cursor-pointer ease"
         >
           Post Comment
         </button>
