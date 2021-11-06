@@ -14,3 +14,7 @@ My personal blog website made with Next.js (React), Tailwind CSS, GraphQL and a 
 ### Setup
 
 The project was created using Next.js bootstrap cli command `npx create-next-app -e with-tailwindcss ./`. to bootstrap a pre configured but blank project into the current directory.
+
+## Styling
+
+- The navigation bar uses the tailwindcss command `contents` which will create a phantom container whose children act like direct children of the parent
