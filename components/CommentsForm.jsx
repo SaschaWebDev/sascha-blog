@@ -89,7 +89,6 @@ const CommentsForm = ({ slug }) => {
             id="storeData"
             name="storeData"
             value="true"
-            checked={storeData}
           />
           <label
             className="ml-2 text-gray-500 cursor-pointer"

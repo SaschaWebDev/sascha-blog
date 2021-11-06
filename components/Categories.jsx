@@ -8,7 +8,7 @@ const Categories = () => {
 
   useEffect(() => {
     getCategories().then((fetchedCategories) =>
-      setCategories(fetchedCategories)
+      setCategories(fetchedCategories.reverse())
     );
   }, []);
 

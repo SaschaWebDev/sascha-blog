@@ -199,3 +199,42 @@ export const getFeaturedPosts = async () => {
       console.log("Error during getFeaturedPosts request: ", error)
     );
 };
+
+export const getCategoryPost = async (slug) => {
+  const query = gql`
+    query GetCategoryPost($slug: String!) {
+      postsConnection(where: { categories_some: { slug: $slug } }) {
+        edges {
+          cursor
+          node {
+            author {
+              bio
+              name
+              id
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  return request(graphqlAPI, query, { slug })
+    .then((result) => result.postsConnection.edges.reverse())
+    .catch((error) =>
+      console.log("Error during getCategoryPost request: ", error)
+    );
+};
