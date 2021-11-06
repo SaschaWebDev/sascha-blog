@@ -91,7 +91,7 @@ export const getSimilarPosts = () => {
     );
 };
 
-export const getCategories = () => {
+export const getCategories = async () => {
   const query = gql`
     query getCategories {
       categories {
