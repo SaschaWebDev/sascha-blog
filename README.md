@@ -58,3 +58,5 @@ export async function getStaticPaths() {
   };
 }
 ```
+
+- Images can be inserted for Static Site Generation (SSG) with the NextJS `import Image from "next/image";`. To keep the quality and aspect ratio as it is the `unoptimized` prop can be applied.
