@@ -60,3 +60,7 @@ export async function getStaticPaths() {
 ```
 
 - Images can be inserted for Static Site Generation (SSG) with the NextJS `import Image from "next/image";`. To keep the quality and aspect ratio as it is the `unoptimized` prop can be applied.
+
+### React.js
+
+- When input data like in a comment form does not need to be persisted within the app state but should be sent directly to the database or in this case the GraphCMS it can be more efficient to use the `useRef` hook and create the input elements like `const commentElement = useRef()`. The input state does not need to be tracked within the component state in these cases.
